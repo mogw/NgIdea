@@ -7,8 +7,8 @@ import { IdeasUpdateComponent } from './ideas-update/ideas-update.component';
 
 const ideasRoutes: Routes = [
   { path: 'ideas', component: IdeasListComponent, pathMatch: 'full' },
+  { path: 'ideas/create', component: IdeasCreateComponent, pathMatch: 'full' },
   { path: 'ideas/:id/edit', component: IdeasUpdateComponent },
-  { path: 'ideas/:id/create', component: IdeasCreateComponent }
 ];
 
 @NgModule({

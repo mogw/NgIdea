@@ -1,0 +1,22 @@
+.idea-card {
+  margin: 16px;
+}
+
+.idea-card-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.idea-content {
+  display: flex;
+}
+
+.idea-img img {
+  max-width: 400px;
+}
+
+.idea-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
