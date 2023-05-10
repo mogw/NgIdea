@@ -1,0 +1,10 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+}
+
+.signup-content {
+  display: flex;
+  flex-direction: column;
+}

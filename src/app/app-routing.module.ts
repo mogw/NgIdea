@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: '',   redirectTo: '/users', pathMatch: 'full' },
+  { path: '',   redirectTo: '/ideas', pathMatch: 'full' },
 ];
 
 @NgModule({
