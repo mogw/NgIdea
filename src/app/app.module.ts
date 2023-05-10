@@ -40,6 +40,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   exports: [
@@ -82,7 +84,7 @@ export class DemoMaterialModule {}
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,6 +95,8 @@ export class DemoMaterialModule {}
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    UsersModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
