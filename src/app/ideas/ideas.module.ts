@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdeasListComponent } from './ideas-list/ideas-list.component';
 import { IdeasCreateComponent } from './ideas-create/ideas-create.component';
 import { IdeasUpdateComponent } from './ideas-update/ideas-update.component';
@@ -13,6 +13,7 @@ import { IdeaService } from './idea.service';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     SharedModule,
     IdeasRoutingModule,

@@ -46,7 +46,7 @@ for (let i = 0; i < 10; i++) {
       i,
       "Idea Summary" + i,
       "https://material.angular.io/assets/img/examples/shiba2.jpg",
-      [new User(1, "john"), new User(2, "bob")],
+      [USERS[0], USERS[1]],
       WORKFLOWS[i],
       USERS[i],
       3,

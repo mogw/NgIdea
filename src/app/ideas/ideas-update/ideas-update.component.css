@@ -9,22 +9,14 @@
 
 .idea-content {
   display: flex;
-  flex-direction: column;
+}
+
+.idea-img img {
   max-width: 400px;
 }
 
 .idea-info {
   display: flex;
-}
-
-.idea-info-assignees,
-.idea-info-workflow,
-idea-info-review {
-  display: flex;
   flex-direction: column;
-}
-
-.idea-review {
-  display: flex;
-  flex-direction: column;
+  justify-content: stretch;
 }

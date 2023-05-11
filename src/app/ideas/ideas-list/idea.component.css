@@ -17,9 +17,13 @@
   display: flex;
 }
 
-.idea-info-assignees, .idea-info-workflow, idea-info-review {
+.idea-info-assignees, .idea-info-workflow, .idea-info-review {
   display: flex;
   flex-direction: column;
+}
+
+.idea-info-assignees p {
+  margin: 0
 }
 
 .idea-review {

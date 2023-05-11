@@ -1,4 +1,4 @@
-<mat-card class="idea-card" *ngIf="idea$ | async as idea">
+<!-- <mat-card class="idea-card" *ngIf="idea$ | async as idea">
   <mat-card-content class="idea-card-content">
     <div class="idea-content">
       <div class="idea-img">
@@ -27,4 +27,34 @@
       <div>{{idea.created}}</div>
     </div>
   </mat-card-content>
+</mat-card> -->
+
+<mat-card class="idea-card" *ngIf="idea">
+  <mat-card-content class="idea-card-content">
+    <div class="idea-content">
+      <div class="idea-img">
+        <img width="100%" [src]="imgUrl" alt="Photo of a Shiba Inu">
+      </div>
+      <div class="idea-info">
+        <mat-form-field>
+          <mat-select placeholder="Assignees" multiple [(value)]="assigneeIds">
+            <mat-option *ngFor="let user of users" [value]="user.id">{{user.username}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Workflow" [(value)]="workflowId">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let workflow of workflows" [value]="workflow.id">{{workflow.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="idea-summary">
+          <textarea matInput placeholder="Idea Summary" [(ngModel)]="summary"></textarea>
+        </mat-form-field> 
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </mat-card-actions>
 </mat-card>

@@ -7,7 +7,7 @@
       <div class="idea-info">
         <div class="idea-info-assignees">
           <div>Assignees</div>
-          <div>{{idea.assignees[0].username}}</div>
+          <div><p *ngFor="let user of idea.assignees">{{user.username}}</p></div>
         </div>
         <div class="idea-info-workflow">
           <div>Workflow</div>
@@ -23,8 +23,8 @@
       {{idea.summary}}
     </div>
     <div class="idea-review">
-      <div>Posted Anonymous User ***** ({{idea.score}})</div>
-      <div>{{idea.created}}</div>
+      <div>Posted {{ idea.owner.username }} ***** ({{idea.score}})</div>
+      <div>{{idea.created | date:'medium'}}</div>
     </div>
   </mat-card-content>
   <mat-card-actions>
