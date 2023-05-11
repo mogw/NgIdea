@@ -15,7 +15,7 @@ export class IdeaComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const workflow = this.workflows.find(w => w.id = this.idea.workflowId)
+    const workflow = this.workflows.find(w => w.id == this.idea.workflowId)
     this.workflowName =  workflow ? workflow.name : ''
   }
 

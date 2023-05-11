@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import {default as decode} from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 const JWT_TOKEN_KEY = 'jwt_token';
 
@@ -40,7 +40,7 @@ export class AuthService {
     const token = localStorage.getItem(JWT_TOKEN_KEY);
     if (!token) return null
 
-    const { id } = decode(token) as any
+    const { id } = jwtDecode(token) as any
     return id
   }
 

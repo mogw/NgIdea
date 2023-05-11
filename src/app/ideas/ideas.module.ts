@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { IdeaComponent } from './ideas-list/idea.component';
 import { IdeaService } from './idea.service';
 import { AuthService } from '../auth/auth.service';
+import { AuthGuard } from '../auth/auth-guard.service';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { AuthService } from '../auth/auth.service';
   ],
   providers: [
     AuthService,
+    AuthGuard,
     IdeaService,
   ]
 })
