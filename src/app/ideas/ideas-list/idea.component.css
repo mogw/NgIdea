@@ -4,18 +4,47 @@
 
 .idea-card-content {
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
+}
+
+.mobile {
+  display: none;
+}
+
+.desktop {
+  display: flex;
 }
 
 .idea-content {
   display: flex;
   flex-direction: column;
-  width: 360px;
+  max-width: 450px;
+  width: 100%;
+}
+
+.idea-img img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.idea-summary {
+  width: 100%;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 30px;
 }
 
 .idea-info {
   display: flex;
-  justify-content: space-around;
+  margin-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  gap: 10px;
+}
+
+.idea-info-section {
+ width: 100%;
 }
 
 .idea-info-assignees, .idea-info-workflow, .idea-info-review {
@@ -28,10 +57,111 @@
 }
 
 .idea-review {
+  width: 100%; 
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+}
+
+.idea-info-workflow-title {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.idea-review-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.idea-review-content .mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.idea-review-content:nth-child(2) {
+  margin-top: 10px;
 }
 
 .workflow-edit {
-  font-size: 16px;
+  font-size: 14px;
+  cursor: pointer;
+  height: 14px;
+}
+
+.idea-detailed-content {
+  margin-top: 5px;
+}
+
+.detailed-info {
+  font-weight: bold;
+  color: #4a88c0;
+}
+
+.review-score {
+  color: white;
+  width: 30px;
+  background-color: #ff9800;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 680px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+  }
+
+  .idea-card-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .idea-content {
+    gap: 15px;
+  }
+
+  .idea-review {
+    align-items: center;
+  }
+
+  .idea-review-content:nth-child(2) {
+    margin-top: 5px;
+  }
+
+  .idea-summary {
+    text-align: center;
+    margin-top: 0px;
+  }
+
+  .idea-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .idea-info-section {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .idea-info-workflow-title {
+    justify-content: center;
+  }
+
+  .score-container {
+    display: flex;
+    justify-content: center;
+  }
 }

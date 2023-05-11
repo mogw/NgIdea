@@ -1,9 +1,9 @@
 <div class="login-container">
-  <p *ngIf="errorMsg">{{errorMsg}}</p>
   <mat-card class="login-card">
     <mat-card-header>
       <mat-card-title>Please Login</mat-card-title>
     </mat-card-header>
+    <p *ngIf="errorMsg">{{errorMsg}}</p>
     <mat-card-content class="login-content">
       <mat-form-field>
         <input matInput placeholder="Username" [(ngModel)]="username">

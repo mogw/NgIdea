@@ -1,21 +1,25 @@
 <mat-card class="idea-card">
-  <mat-card-content class="idea-card-content">
+  <mat-card-content class="idea-card-content desktop">
     <div class="idea-content">
       <div class="idea-img">
         <img width="100%" [src]="idea.image" alt="Photo of a Shiba Inu">
       </div>
       <div class="idea-info">
-        <div class="idea-info-assignees">
+        <div class="idea-info-assignees idea-info-section">
           <b>Assignees</b>
-          <div *ngIf="idea.assignees.length > 0"><p *ngFor="let user of idea.assignees">{{user.username}}</p></div>
+          <div *ngIf="idea.assignees.length > 0" class="idea-detailed-content detailed-info">
+            <span *ngFor="let user of idea.assignees; let last = last">
+              {{user.username}}<span *ngIf="!last">, </span> 
+            </span>
+          </div>
         </div>
-        <div class="idea-info-workflow">
-          <b>Workflow <mat-icon (click)="edit()" class="workflow-edit">edit</mat-icon></b>
-          <div>{{workflowName}}</div>
+        <div class="idea-info-workflow idea-info-section">
+          <b class="idea-info-workflow-title"><span>Workflow</span> <mat-icon (click)="edit()" class="workflow-edit">edit</mat-icon></b>
+          <div class="idea-detailed-content detailed-info">{{workflowName}}</div>
         </div>
-        <div class="idea-info-review">
+        <div class="idea-info-review idea-info-section">
           <b>Review Score</b>
-          <div>{{score}}</div>
+          <div class="idea-detailed-content review-score">{{score}}</div>
         </div>
       </div>
     </div>
@@ -23,18 +27,61 @@
       {{idea.summary}}
     </div>
     <div class="idea-review">
-      <div>Posted {{idea.ownerName}}
+      <div class="idea-review-content">
+        <span>Posted <span class="detailed-info">{{idea.ownerName}}</span></span>
         <app-review [rate]="idea.reviewScore" [ideaId]="idea.id" (updatedScore)="updatedScore($event)"></app-review>
+        ({{idea.reviewScore}})
       </div>
-      <div>
+      <div class="idea-review-content">
         <mat-icon>calendar_month</mat-icon>
         <span>{{idea.createdAt | date:'medium'}}</span>
       </div>
     </div>
   </mat-card-content>
-  <mat-card-actions>
-    <a *ngIf="idea.ownerId === currentUserId" mat-raised-button [routerLink]="['/ideas', idea.id, 'edit']">Edit</a>
-    <a mat-raised-button [routerLink]="['/ideas', 'create']">Create</a>
-    <button *ngIf="idea.ownerId === currentUserId" mat-button (click)="delete()">Delete</button>
+  <mat-card-content class="idea-card-content mobile">
+    <div class="idea-content">
+      <div class="idea-img">
+        <img width="100%" [src]="idea.image" alt="Photo of a Shiba Inu">
+      </div>
+      <div class="idea-review">
+        <div class="idea-review-content">
+          <span>Posted <span class="detailed-info">{{idea.ownerName}}</span></span>
+          <app-review [rate]="idea.reviewScore" [ideaId]="idea.id" (updatedScore)="updatedScore($event)"></app-review>
+          ({{idea.reviewScore}})
+        </div>
+        <div class="idea-review-content">
+          <mat-icon>calendar_month</mat-icon>
+          <span>{{idea.createdAt | date:'medium'}}</span>
+        </div>
+      </div>
+      <div class="idea-summary">
+        {{idea.summary}}
+      </div>
+      <div class="idea-info">
+        <div class="idea-info-review idea-info-section">
+          <b>Review Score</b>
+          <div class="score-container">
+            <div class="idea-detailed-content review-score">{{score}}</div>
+          </div>
+        </div>
+        <div class="idea-info-workflow idea-info-section">
+          <b class="idea-info-workflow-title"><span>Workflow</span> <mat-icon (click)="edit()" class="workflow-edit">edit</mat-icon></b>
+          <div class="idea-detailed-content detailed-info">{{workflowName}}</div>
+        </div>
+        <div class="idea-info-assignees idea-info-section">
+          <b>Assignees</b>
+          <div *ngIf="idea.assignees.length > 0" class="idea-detailed-content detailed-info">
+            <span *ngFor="let user of idea.assignees; let last = last">
+              {{user.username}}<span *ngIf="!last">, </span> 
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="button-group">
+    <a *ngIf="idea.ownerId === currentUserId" mat-raised-button [routerLink]="['/ideas', idea.id, 'edit']" color="basic">Edit</a>
+    <a mat-raised-button [routerLink]="['/ideas', 'create']" color="primary">Create</a>
+    <button *ngIf="idea.ownerId === currentUserId" mat-button (click)="delete()" color="warn">Delete</button>
   </mat-card-actions>
 </mat-card>
