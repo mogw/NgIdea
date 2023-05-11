@@ -11,6 +11,7 @@ import { IdeaService } from './idea.service';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { ReviewComponent } from './review/review.component';
+import { PhotoComponent } from './photo/photo.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ReviewComponent } from './review/review.component';
     IdeasListComponent,
     IdeasCreateComponent,
     IdeasUpdateComponent,
-    ReviewComponent
+    ReviewComponent,
+    PhotoComponent
   ],
   providers: [
     AuthService,

@@ -1,0 +1,4 @@
+<div class="idea-photo">
+  <img [src]="imageSrc" (click)="onImageClick()" />
+  <input type="file" accept="image/*" (change)="onFileChange($event)" style="display: none" #fileInput id="fileInput"/>
+</div>

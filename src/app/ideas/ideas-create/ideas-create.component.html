@@ -1,9 +1,7 @@
 <mat-card class="idea-card">
   <mat-card-content class="idea-card-content">
     <div class="idea-content">
-      <div class="idea-img">
-        <img width="100%" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      </div>
+      <app-photo [image]="" (updateImage)="updateImage($event)"></app-photo>
       <div class="idea-info">
         <mat-form-field>
           <mat-select placeholder="Assignees" multiple [(value)]="assingeeIds">

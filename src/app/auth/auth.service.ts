@@ -3,12 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import jwtDecode from 'jwt-decode';
+import { environment } from '../../environments/environment';
 
 const JWT_TOKEN_KEY = 'jwt_token';
 
 @Injectable()
 export class AuthService {
-  private apiUrl = 'http://192.168.113.217:3001/api'
+  private apiUrl = environment.apiUrl
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

@@ -1,40 +1,7 @@
-<!-- <mat-card class="idea-card" *ngIf="idea$ | async as idea">
-  <mat-card-content class="idea-card-content">
-    <div class="idea-content">
-      <div class="idea-img">
-        <img width="100%" [src]="idea.imgUrl" alt="Photo of a Shiba Inu">
-      </div>
-      <div class="idea-info">
-        <div class="idea-info-assignees">
-          <div>Assignees</div>
-          <div>{{idea.assignees[0].username}}</div>
-        </div>
-        <div class="idea-info-workflow">
-          <div>Workflow</div>
-          <div>{{idea.workflow.name}}</div>
-        </div>
-        <div class="idea-info-review">
-          <div>Review Score</div>
-          <div>{{idea.score}}</div>
-        </div>
-      </div>
-    </div>
-    <div class="idea-summary">
-      {{idea.summary}}
-    </div>
-    <div class="idea-review">
-      <div>Posted Anonymous User ***** ({{idea.score}})</div>
-      <div>{{idea.created}}</div>
-    </div>
-  </mat-card-content>
-</mat-card> -->
-
 <mat-card class="idea-card" *ngIf="idea">
   <mat-card-content class="idea-card-content">
     <div class="idea-content">
-      <div class="idea-img">
-        <img width="100%" [src]="ideaImage" alt="Photo of a Shiba Inu">
-      </div>
+      <app-photo [image]="idea.image" (updateImage)="updateImage($event)"></app-photo>
       <div class="idea-info">
         <mat-form-field>
           <mat-select placeholder="Assignees" multiple [(value)]="assigneeIds">

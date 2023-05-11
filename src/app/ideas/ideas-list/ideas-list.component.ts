@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Idea, IdeaService, Workflow } from '../idea.service';
 import 'rxjs/add/operator/switchMap';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-ideas-list',
@@ -30,7 +31,7 @@ export class IdeasListComponent implements OnInit {
     this.service.getIdeas().subscribe((data) => {
       const { result: ideas } = data as any
       this.ideas = ideas.map(idea => {
-        idea.image = `http://192.168.113.217:3001/api/image/${idea.image}`
+        idea.image = `${environment.apiUrl}/image/${idea.image || environment.defaultImg}`
         return idea
       })
       console.log('ideas', ideas)

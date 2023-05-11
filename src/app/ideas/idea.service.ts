@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 export class User {
   userId: number
@@ -25,7 +26,7 @@ export interface Idea {
 
 @Injectable()
 export class IdeaService {
-  private apiUrl = 'http://192.168.113.217:3001/api'
+  private apiUrl = environment.apiUrl
 
   constructor(
     private http: HttpClient,
@@ -75,6 +76,16 @@ export class IdeaService {
       ideaId: id,
       score,
     }, this.getHeader())
+  }
+
+  uploadImage(file: File): Promise<string> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http
+      .post(`${this.apiUrl}/image`, formData)
+      .toPromise()
+      .then((res: any) => res.filename);
   }
 
   private getHeader() {

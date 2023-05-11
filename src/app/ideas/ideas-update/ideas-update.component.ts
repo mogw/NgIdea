@@ -17,7 +17,6 @@ export class IdeasUpdateComponent implements OnInit, OnDestroy {
   workflowId: number;
   summary: string;
   image: string;
-  ideaImage: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +31,6 @@ export class IdeasUpdateComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         const { result: idea } = data as any
         this.idea = idea
-        this.ideaImage = `http://192.168.113.217:3001/api/image/${idea.image}`
 
         this.assigneeIds = this.idea.assignees.map(a => a.userId)
         this.workflowId = this.idea.workflowId
@@ -58,10 +56,14 @@ export class IdeasUpdateComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.service.updateIdea(this.idea.id, this.summary || '', this.workflowId, this.assigneeIds || [], this.idea.image).subscribe(data => {
+    this.service.updateIdea(this.idea.id, this.summary || '', this.workflowId, this.assigneeIds || [], this.image).subscribe(data => {
       this.router.navigate(['/ideas']);
     }, error => {
       console.log('error', error)
     })
+  }
+
+  updateImage(image) {
+    this.image = image
   }
 }

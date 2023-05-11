@@ -15,6 +15,7 @@ export class IdeasCreateComponent implements OnInit {
   workflowId: number;
   assingeeIds: number[];
   summary: string;
+  image: string;
 
   constructor(
     private service: IdeaService,
@@ -37,11 +38,14 @@ export class IdeasCreateComponent implements OnInit {
   }
 
   save() {
-    console.log(this.workflowId, this.assingeeIds, this.summary)
-    this.service.createIdea(this.summary || '', this.workflowId, this.assingeeIds || [], '').subscribe(data => {
+    this.service.createIdea(this.summary || '', this.workflowId, this.assingeeIds || [], this.image || '').subscribe(data => {
       this.router.navigate(['/ideas']);
     }, error => {
       console.log('error', error)
     })
+  }
+
+  updateImage(image) {
+    this.image = image
   }
 }
