@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   apiUrl: 'http://192.168.113.217:3001/api',
-  defaultImg: '1683750524824_DesktopView.png',
+  defaultImg: 'default.png',
 };

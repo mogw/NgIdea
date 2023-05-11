@@ -10,7 +10,9 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./ideas-list.component.css']
 })
 export class IdeasListComponent implements OnInit {
-  ideas: Idea[];
+  page: number = 0
+  hasMoreData: boolean = true
+  ideas: Idea[] = [];
   workflows: Workflow[];
   
   constructor(
@@ -19,7 +21,7 @@ export class IdeasListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getIdeas()
+    this.loadIdeas()
 
     this.service.getWorkflows().subscribe((data) => {
       const { result: workflows } = data as any
@@ -27,19 +29,37 @@ export class IdeasListComponent implements OnInit {
     })
   }
 
-  getIdeas() {
-    this.service.getIdeas().subscribe((data) => {
+  loadIdeas() {
+    this.service.getIdeas(this.page).subscribe((data) => {
       const { result: ideas } = data as any
-      this.ideas = ideas.map(idea => {
-        idea.image = `${environment.apiUrl}/image/${idea.image || environment.defaultImg}`
-        idea.createdAt = new Date(idea.createdAt)
-        return idea
-      })
-      console.log('ideas', ideas)
+      if (ideas.length > 0) {
+        const loadedIdeas = ideas.map(idea => {
+          idea.image = `${environment.apiUrl}/image/${idea.image || environment.defaultImg}`
+          idea.createdAt = new Date(idea.createdAt)
+          return idea
+        })
+        console.log('loadedIdeas', loadedIdeas)
+        this.ideas = this.ideas.concat(loadedIdeas)
+        this.page++;
+      } else {
+        this.hasMoreData = false;
+      }
     })
   }
 
   deleteIdea(id: number) {
-    this.service.deleteIdea(id).subscribe(() => this.getIdeas())
+    this.service.deleteIdea(id).subscribe(() => {
+      this.ideas = this.ideas.filter(idea => idea.id !== id)
+    })
+  }
+
+  onScrollDown() {
+    if (this.hasMoreData) {
+      this.loadIdeas()
+    }
+  }
+
+  onScrollUp() {
+
   }
 }

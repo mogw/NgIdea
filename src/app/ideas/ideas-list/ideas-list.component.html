@@ -1,8 +1,14 @@
-<div class="ideas-list-container" *ngIf="ideas">
+<!-- <div class="ideas-list-container" *ngIf="ideas">
   <app-idea
     *ngFor="let idea of ideas"
     [idea]="idea"
     [workflows]="workflows"
     (deleteIdea)="deleteIdea($event)"
   ></app-idea>
+</div> -->
+<div *ngIf="ideas" class="ideas-list-container" infiniteScroll [infiniteScrollDistance]="2"
+  [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="50" (scrolled)="onScrollDown()"
+  (scrolledUp)="onScrollUp()">
+  <app-idea *ngFor="let idea of ideas" [idea]="idea" [workflows]="workflows"
+    (deleteIdea)="deleteIdea($event)"></app-idea>
 </div>

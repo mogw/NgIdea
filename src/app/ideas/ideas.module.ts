@@ -12,6 +12,7 @@ import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { ReviewComponent } from './review/review.component';
 import { PhotoComponent } from './photo/photo.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PhotoComponent } from './photo/photo.component';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    InfiniteScrollModule,
     IdeasRoutingModule,
   ],
   declarations: [

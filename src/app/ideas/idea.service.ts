@@ -20,7 +20,8 @@ export interface Idea {
   assignees: User[],
   workflowId: number,
   reviewScore: number,
-  owner?: User,
+  ownerId: number,
+  ownerName: string,
   createdAt: number,
 }
 
@@ -33,8 +34,8 @@ export class IdeaService {
     private authService: AuthService
   ) { }
 
-  getIdeas() {
-    return this.http.get(`${this.apiUrl}/ideas`, this.getHeader());
+  getIdeas(page: number) {
+    return this.http.get(`${this.apiUrl}/ideas?page=${page}`, this.getHeader());
   }
 
   getIdea(id: number | string) {
