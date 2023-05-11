@@ -33,16 +33,16 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/users/signup`, credentials, this.httpOptions)
   }
 
-  setToken(token: string) {
+  setToken(token: string, userId: number) {
     localStorage.setItem(JWT_TOKEN_KEY, token);
+    localStorage.setItem('user_id', userId.toString());
   }
 
   getCurrentUserId() {
-    const token = localStorage.getItem(JWT_TOKEN_KEY);
-    if (!token) return null
+    const userId = localStorage.getItem('user_id');
+    if (!userId) return null
 
-    const { id } = jwtDecode(token) as any
-    return id
+    return userId
   }
 
   getToken() {

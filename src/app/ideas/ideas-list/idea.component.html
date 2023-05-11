@@ -10,12 +10,12 @@
           <div *ngIf="idea.assignees.length > 0"><p *ngFor="let user of idea.assignees">{{user.username}}</p></div>
         </div>
         <div class="idea-info-workflow">
-          <b>Workflow</b>
+          <b>Workflow <mat-icon (click)="edit()" class="workflow-edit">edit</mat-icon></b>
           <div>{{workflowName}}</div>
         </div>
         <div class="idea-info-review">
           <b>Review Score</b>
-          <div>{{idea.reviewScore}}</div>
+          <div>{{score}}</div>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="idea-review">
       <div>Posted {{idea.ownerName}}
-        <app-review [rate]="idea.reviewScore" [ideaId]="idea.id"></app-review>
+        <app-review [rate]="idea.reviewScore" [ideaId]="idea.id" (updatedScore)="updatedScore($event)"></app-review>
       </div>
       <div>
         <mat-icon>calendar_month</mat-icon>
@@ -33,8 +33,8 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <a [routerLink]="['/ideas', idea.id, 'edit']">Edit</a>
-    <a [routerLink]="['/ideas', 'create']">Create</a>
-    <button mat-button (click)="delete()">Delete</button>
+    <a *ngIf="idea.ownerId === currentUserId" mat-raised-button [routerLink]="['/ideas', idea.id, 'edit']">Edit</a>
+    <a mat-raised-button [routerLink]="['/ideas', 'create']">Create</a>
+    <button *ngIf="idea.ownerId === currentUserId" mat-button (click)="delete()">Delete</button>
   </mat-card-actions>
 </mat-card>

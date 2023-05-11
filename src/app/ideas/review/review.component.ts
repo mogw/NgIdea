@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IdeaService } from '../idea.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { IdeaService } from '../idea.service';
 export class ReviewComponent implements OnInit {
   @Input() rate: number;
   @Input() ideaId: number;
+  @Output() updatedScore = new EventEmitter<number>();
 
   rating: number = 0;
 
@@ -22,6 +23,8 @@ export class ReviewComponent implements OnInit {
     if (this.rating > 0) return
 
     this.service.giveReview(this.ideaId, rating).subscribe(data => {
+      const { result: { ideaScore } } = data as any
+      this.updatedScore.emit(ideaScore)
       this.rating = rating;
     })
   }

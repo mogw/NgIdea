@@ -25,9 +25,9 @@ export class SignupComponent implements OnInit {
     this.isLoading = true
 
     this.authService.signup(this.username, this.password).subscribe(data => {
-      const { result: { token } } = data as any
+      const { result: { token, profile: { id } } } = data as any
 
-      this.authService.setToken(token)
+      this.authService.setToken(token, id)
       this.isLoading = false
       this.router.navigate(['/ideas'])
     }, error => {
