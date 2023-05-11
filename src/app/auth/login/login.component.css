@@ -1,7 +1,11 @@
 .login-container {
   display: flex;
-  justify-content: center;
-  vertical-align: center;
+  flex-direction: column;
+  max-width: 360px;
+}
+
+.login-container p {
+  color: red;
 }
 
 .login-content {
