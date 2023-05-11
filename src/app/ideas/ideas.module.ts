@@ -10,6 +10,7 @@ import { IdeaComponent } from './ideas-list/idea.component';
 import { IdeaService } from './idea.service';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth-guard.service';
+import { ReviewComponent } from './review/review.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AuthGuard } from '../auth/auth-guard.service';
     IdeaComponent,
     IdeasListComponent,
     IdeasCreateComponent,
-    IdeasUpdateComponent
+    IdeasUpdateComponent,
+    ReviewComponent
   ],
   providers: [
     AuthService,

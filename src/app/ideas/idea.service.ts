@@ -70,6 +70,13 @@ export class IdeaService {
     return this.http.delete(`${this.apiUrl}/ideas/${id}`, this.getHeader());
   }
 
+  giveReview(id: number, score: number) {
+    return this.http.post(`${this.apiUrl}/reviews`, {
+      ideaId: id,
+      score,
+    }, this.getHeader())
+  }
+
   private getHeader() {
     const token = this.authService.getToken()
     return {

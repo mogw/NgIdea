@@ -23,8 +23,10 @@
       {{idea.summary}}
     </div>
     <div class="idea-review">
-      <div>Posted Me ***** ({{idea.reviewScore}})</div>
-      <div>Todo</div>
+      <div>Posted Me
+        <app-review [rate]="idea.reviewScore" [ideaId]="idea.id"></app-review>
+      </div>
+      <div><mat-icon>calendar_month</mat-icon></div>
     </div>
   </mat-card-content>
   <mat-card-actions>

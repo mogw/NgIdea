@@ -1,0 +1,9 @@
+.star-rating {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.star-rating .mat-icon {
+  color: #ffbe00;
+  width: 20px;
+}
