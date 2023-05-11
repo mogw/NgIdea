@@ -21,7 +21,7 @@ export interface Idea {
   workflowId: number,
   reviewScore: number,
   owner?: User,
-  created?: number,
+  createdAt: number,
 }
 
 @Injectable()

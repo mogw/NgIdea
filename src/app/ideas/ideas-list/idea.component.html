@@ -6,15 +6,15 @@
       </div>
       <div class="idea-info">
         <div class="idea-info-assignees">
-          <div>Assignees</div>
+          <b>Assignees</b>
           <div *ngIf="idea.assignees.length > 0"><p *ngFor="let user of idea.assignees">{{user.username}}</p></div>
         </div>
         <div class="idea-info-workflow">
-          <div>Workflow</div>
+          <b>Workflow</b>
           <div>{{workflowName}}</div>
         </div>
         <div class="idea-info-review">
-          <div>Review Score</div>
+          <b>Review Score</b>
           <div>{{idea.reviewScore}}</div>
         </div>
       </div>
@@ -26,7 +26,10 @@
       <div>Posted Me
         <app-review [rate]="idea.reviewScore" [ideaId]="idea.id"></app-review>
       </div>
-      <div><mat-icon>calendar_month</mat-icon></div>
+      <div>
+        <mat-icon>calendar_month</mat-icon>
+        <span>{{idea.createdAt | date:'medium'}}</span>
+      </div>
     </div>
   </mat-card-content>
   <mat-card-actions>

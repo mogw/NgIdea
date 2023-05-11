@@ -10,11 +10,12 @@
 .idea-content {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  width: 360px;
 }
 
 .idea-info {
   display: flex;
+  justify-content: space-around;
 }
 
 .idea-info-assignees, .idea-info-workflow, .idea-info-review {

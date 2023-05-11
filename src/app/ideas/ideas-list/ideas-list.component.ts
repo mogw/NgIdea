@@ -32,6 +32,7 @@ export class IdeasListComponent implements OnInit {
       const { result: ideas } = data as any
       this.ideas = ideas.map(idea => {
         idea.image = `${environment.apiUrl}/image/${idea.image || environment.defaultImg}`
+        idea.createdAt = new Date(idea.createdAt)
         return idea
       })
       console.log('ideas', ideas)
