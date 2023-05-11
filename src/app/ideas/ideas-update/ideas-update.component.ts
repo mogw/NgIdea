@@ -16,7 +16,8 @@ export class IdeasUpdateComponent implements OnInit, OnDestroy {
   assigneeIds: number[];
   workflowId: number;
   summary: string;
-  imgUrl: string;
+  image: string;
+  ideaImage: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,15 +29,25 @@ export class IdeasUpdateComponent implements OnInit, OnDestroy {
     this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.service.getIdea(params.get('id')))
-      .subscribe(idea => {
+      .subscribe(data => {
+        const { result: idea } = data as any
         this.idea = idea
-        this.assigneeIds = idea.assignees.map(user => user.id)
-        this.workflowId = idea.workflow.id
-        this.summary = idea.summary
-        this.imgUrl = idea.imgUrl
+        this.ideaImage = `http://192.168.113.217:3001/api/image/${idea.image}`
+
+        this.assigneeIds = this.idea.assignees.map(a => a.userId)
+        this.workflowId = this.idea.workflowId
+        this.summary = this.idea.summary
+        this.image = this.idea.image
       });
-    this.service.getUsers().subscribe(users => this.users = users);
-    this.service.getWorkflows().subscribe(workflows => this.workflows = workflows)
+
+    this.service.getWorkflows().subscribe((data) => {
+      const { result: workflows } = data as any
+      this.workflows = workflows
+    })
+    this.service.getUsers().subscribe((data) => {
+      const { result: users } = data as any
+      this.users = users
+    })
   }
 
   ngOnDestroy() {
@@ -47,8 +58,10 @@ export class IdeasUpdateComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    console.log('assginees', this.assigneeIds)
-    console.log('workflowId', this.workflowId)
-    console.log('summary', this.summary)
+    this.service.updateIdea(this.idea.id, this.summary || '', this.workflowId, this.assigneeIds || [], this.idea.image).subscribe(data => {
+      this.router.navigate(['/ideas']);
+    }, error => {
+      console.log('error', error)
+    })
   }
 }

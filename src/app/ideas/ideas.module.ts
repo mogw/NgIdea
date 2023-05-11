@@ -8,6 +8,7 @@ import { IdeasRoutingModule } from './ideas-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { IdeaComponent } from './ideas-list/idea.component';
 import { IdeaService } from './idea.service';
+import { AuthService } from '../auth/auth.service';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { IdeaService } from './idea.service';
     IdeasUpdateComponent
   ],
   providers: [
+    AuthService,
     IdeaService,
   ]
 })

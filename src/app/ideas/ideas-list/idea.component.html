@@ -2,20 +2,20 @@
   <mat-card-content class="idea-card-content">
     <div class="idea-content">
       <div class="idea-img">
-        <img width="100%" [src]="idea.imgUrl" alt="Photo of a Shiba Inu">
+        <img width="100%" [src]="idea.image" alt="Photo of a Shiba Inu">
       </div>
       <div class="idea-info">
         <div class="idea-info-assignees">
           <div>Assignees</div>
-          <div><p *ngFor="let user of idea.assignees">{{user.username}}</p></div>
+          <div *ngIf="idea.assignees.length > 0"><p *ngFor="let user of idea.assignees">{{user.username}}</p></div>
         </div>
         <div class="idea-info-workflow">
           <div>Workflow</div>
-          <div>{{idea.workflow.name}}</div>
+          <div>{{workflowName}}</div>
         </div>
         <div class="idea-info-review">
           <div>Review Score</div>
-          <div>{{idea.score}}</div>
+          <div>{{idea.reviewScore}}</div>
         </div>
       </div>
     </div>
@@ -23,12 +23,13 @@
       {{idea.summary}}
     </div>
     <div class="idea-review">
-      <div>Posted {{ idea.owner.username }} ***** ({{idea.score}})</div>
-      <div>{{idea.created | date:'medium'}}</div>
+      <div>Posted Me ***** ({{idea.reviewScore}})</div>
+      <div>Todo</div>
     </div>
   </mat-card-content>
   <mat-card-actions>
     <a [routerLink]="['/ideas', idea.id, 'edit']">Edit</a>
     <a [routerLink]="['/ideas', 'create']">Create</a>
+    <button mat-button (click)="delete()">Delete</button>
   </mat-card-actions>
 </mat-card>

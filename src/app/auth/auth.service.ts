@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import {default as decode} from 'jwt-decode';
 
 const JWT_TOKEN_KEY = 'jwt_token';
 
@@ -29,21 +30,23 @@ export class AuthService {
   signup(username: string, password: string) {
     const credentials = { username, password }
     return this.http.post(`${this.apiUrl}/users/signup`, credentials, this.httpOptions)
-      // .pipe(catchError(this.handleError))
   }
 
   setToken(token: string) {
     localStorage.setItem(JWT_TOKEN_KEY, token);
   }
 
-  getToken() {
+  getCurrentUserId() {
     const token = localStorage.getItem(JWT_TOKEN_KEY);
-    return token
+    if (!token) return null
+
+    const { id } = decode(token) as any
+    return id
   }
 
-  isAuthenticated(): boolean {
+  getToken() {
     const token = localStorage.getItem(JWT_TOKEN_KEY);
-    return token ? true : false;
+    return token;
   }
 
   private handleError(error: HttpErrorResponse) {

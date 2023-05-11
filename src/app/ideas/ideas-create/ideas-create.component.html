@@ -6,18 +6,18 @@
       </div>
       <div class="idea-info">
         <mat-form-field>
-          <mat-select placeholder="Assignees" multiple>
-            <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{user.username}}</mat-option>
+          <mat-select placeholder="Assignees" multiple [(value)]="assingeeIds">
+            <mat-option *ngFor="let user of users" [value]="user.id">{{user.username}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
-          <mat-select placeholder="Workflow">
+          <mat-select placeholder="Workflow" [(value)]="workflowId">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let workflow of workflows$ | async" [value]="workflow.id">{{workflow.name}}</mat-option>
+            <mat-option *ngFor="let workflow of workflows" [value]="workflow.id">{{workflow.name}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="idea-summary">
-          <textarea matInput placeholder="Idea Summary"></textarea>
+          <textarea matInput placeholder="Idea Summary" [(ngModel)]="summary"></textarea>
         </mat-form-field> 
       </div>
     </div>

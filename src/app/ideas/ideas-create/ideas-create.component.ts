@@ -12,20 +12,36 @@ import { IdeaService, User, Workflow } from '../idea.service';
 export class IdeasCreateComponent implements OnInit {
   workflows: Workflow[];
   users: User[];
-  
+  workflowId: number;
+  assingeeIds: number[];
+  summary: string;
+
   constructor(
     private service: IdeaService,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.service.getWorkflows().subscribe(workflows => this.workflows = workflows);
-    this.service.getUsers().subscribe(users => this.users = users);
+    this.service.getWorkflows().subscribe((data) => {
+      const { result: workflows } = data as any
+      this.workflows = workflows
+    })
+    this.service.getUsers().subscribe((data) => {
+      const { result: users } = data as any
+      this.users = users
+    })
   }
 
   cancel() {
     this.router.navigate(['/ideas']);
   }
 
-  save() {}
+  save() {
+    console.log(this.workflowId, this.assingeeIds, this.summary)
+    this.service.createIdea(this.summary || '', this.workflowId, this.assingeeIds || [], '').subscribe(data => {
+      this.router.navigate(['/ideas']);
+    }, error => {
+      console.log('error', error)
+    })
+  }
 }

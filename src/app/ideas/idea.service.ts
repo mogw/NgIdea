@@ -1,70 +1,82 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class User {
-  constructor(
-    public id: number,
-    public username: string
-  ) { }
+  userId: number
+  username: string
 }
 
-export class Workflow {
-  constructor(
-    public id: number,
-    public name: string,
-  ) { }
+export interface Workflow {
+  id: number
+  name: string
 }
 
-export class Idea {
-  constructor(
-    public id: number,
-    public summary: string,
-    public imgUrl: string,
-    public assignees: User[],
-    public workflow: Workflow,
-    public owner: User,
-    public score: number,
-    public created: number,
-  ) { }
-}
-
-let IDEAS = [];
-let WORKFLOWS = [];
-let USERS = [];
-
-for (let i = 0; i < 10; i++) {
-  USERS.push(new User(i, "user-" + i))
-}
-for (let i = 0; i < 10; i++) {
-  WORKFLOWS.push(
-    new Workflow(i, "W " + i)
-  )
-}
-for (let i = 0; i < 10; i++) {
-  IDEAS.push(
-    new Idea(
-      i,
-      "Idea Summary" + i,
-      "https://material.angular.io/assets/img/examples/shiba2.jpg",
-      [USERS[0], USERS[1]],
-      WORKFLOWS[i],
-      USERS[i],
-      3,
-      Date.now(),
-    )
-  )
+export interface Idea {
+  id: number,
+  summary: string,
+  image: string,
+  assignees: User[],
+  workflowId: number,
+  reviewScore: number,
+  owner?: User,
+  created?: number,
 }
 
 @Injectable()
 export class IdeaService {
-  getIdeas() { return Observable.of(IDEAS); }
+  private apiUrl = 'http://192.168.113.217:3001/api'
 
-  getIdea(id: number | string) {
-    return this.getIdeas()
-      .map(ideas => ideas.find(idea => idea.id === +id));
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
+
+  getIdeas() {
+    return this.http.get(`${this.apiUrl}/ideas`, this.getHeader());
   }
 
-  getWorkflows() { return Observable.of(WORKFLOWS) }
+  getIdea(id: number | string) {
+    return this.http.get(`${this.apiUrl}/ideas/${id}`, this.getHeader());
+  }
 
-  getUsers() { return Observable.of(USERS) }
+  getWorkflows() {
+    return this.http.get(`${this.apiUrl}/workflows`, this.getHeader());
+  }
+
+  getUsers() {
+    return this.http.get(`${this.apiUrl}/users`, this.getHeader());
+  }
+
+  createIdea(summary: string, workflowId: number, assignees: number[], image: string) {
+    return this.http.post(`${this.apiUrl}/ideas`, {
+      summary,
+      workflowId,
+      assignees,
+      image
+    }, this.getHeader())
+  }
+
+  updateIdea(id: number, summary: string, workflowId: number, assignees: number[], image: string) {
+    return this.http.put(`${this.apiUrl}/ideas/${id}`, {
+      summary,
+      workflowId,
+      assignees,
+      image
+    }, this.getHeader())
+  }
+
+  deleteIdea(id: number) {
+    return this.http.delete(`${this.apiUrl}/ideas/${id}`, this.getHeader());
+  }
+
+  private getHeader() {
+    const token = this.authService.getToken()
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    }
+  }
 }

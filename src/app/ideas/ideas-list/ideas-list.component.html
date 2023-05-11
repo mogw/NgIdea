@@ -1,3 +1,8 @@
-<div class="ideas-list-container" *ngIf="ideas$ | async as ideas">
-  <app-idea *ngFor="let idea of ideas$ | async" [idea]="idea"></app-idea>
+<div class="ideas-list-container" *ngIf="ideas">
+  <app-idea
+    *ngFor="let idea of ideas"
+    [idea]="idea"
+    [workflows]="workflows"
+    (deleteIdea)="deleteIdea($event)"
+  ></app-idea>
 </div>
